@@ -5,11 +5,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.*;
+import com.google.gson.annotations.SerializedName;
 
 public class AlphavantageApi {
     private static AlphavantageApi instance = new AlphavantageApi();
@@ -24,20 +24,94 @@ public class AlphavantageApi {
     private HttpClient httpClient = HttpClient.newHttpClient();
     private Gson gson = new Gson();
 
-    private Map<String, Object> getData(String query) throws IOException, InterruptedException {
+    private String makeRequest(String query) throws IOException, InterruptedException {
         var request = HttpRequest.newBuilder().uri(URI.create(API_URI + query)).build();
-        var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        var data = gson.fromJson(response, Map.class);
-        return data;
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
     public List<String> symbol_search(String keyword) throws IOException, InterruptedException {
-        var data = getData("&function=SYMBOL_SEARCH&keywords=" + keyword);
+        var response = makeRequest("&function=SYMBOL_SEARCH&keywords=" + keyword);
+        var data  = gson.fromJson(response, Map.class);
         var symbols = (List<Map<String, String>>) data.get("bestMatches");
         return symbols.stream().map(m -> m.get("1. symbol")).collect(java.util.stream.Collectors.toList());
     }
 
-    public List<Double> getStockData(String stockName) {
-        return List.of();
+    public static class Metadata {
+        @SerializedName("1. Information")
+        public String information;
+
+        @SerializedName("2. Symbol")
+        public String symbol;
+
+        @Override
+        public String toString() {
+            return "Metadata{" +
+                    "information='" + information + '\'' +
+                    ", symbol='" + symbol + '\'' +
+                    '}';
+        }
+    }
+
+    public static class TimeSeries {
+        // public String date;
+        @SerializedName("1. open")
+        public double open;
+
+        @SerializedName("2. high")
+        public double high;
+
+        @SerializedName("3. low")
+        public double low;
+
+        @SerializedName("4. close")
+        public double close;
+
+        @SerializedName("5. volume")
+        public double volume;
+
+        @Override
+        public String toString() {
+            return "TimeSeries{" +
+                    "open=" + open +
+                    ", high=" + high +
+                    ", low=" + low +
+                    ", close=" + close +
+                    ", volume=" + volume +
+                    '}';
+        }
+    }
+
+    public static class TimeSeriesWrapper {
+        @SerializedName("Meta Data")
+        public Metadata metadata;
+
+        @SerializedName("Time Series (Daily)")
+        public Map<String, TimeSeries> timeSeries;
+
+        @Override
+        public String toString() {
+            return "TimeSeriesWrapper{" +
+                    "metadata=" + metadata +
+                    ", timeSeries=" + timeSeries +
+                    '}';
+        }
+    }
+
+    public TimeSeriesWrapper time_series_daily(String symbol) throws IOException, InterruptedException {
+        var response = makeRequest("&function=TIME_SERIES_DAILY&symbol=" + symbol);
+        var data = gson.fromJson(response, TimeSeriesWrapper.class);
+        return data;
+    }
+
+    public TimeSeriesWrapper time_series_weekly(String symbol) throws IOException, InterruptedException {
+        var response = makeRequest("&function=TIME_SERIES_WEEKLY&symbol=" + symbol);
+        var data = gson.fromJson(response, TimeSeriesWrapper.class);
+        return data;
+    }
+
+    public TimeSeriesWrapper time_series_monthly(String symbol) throws IOException, InterruptedException {
+        var response = makeRequest("&function=TIME_SERIES_MONTHLY&symbol=" + symbol);
+        var data = gson.fromJson(response, TimeSeriesWrapper.class);
+        return data;
     }
 }
