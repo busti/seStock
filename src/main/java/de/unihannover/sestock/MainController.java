@@ -12,6 +12,8 @@ public class MainController {
     @FXML
     public ComboBox<String> stockName;
 
+    public String stockFooBar = "AAPL";
+
     @FXML
     protected void onStockNameChange() throws IOException, InterruptedException {
         var text = stockName.getEditor().getText();
