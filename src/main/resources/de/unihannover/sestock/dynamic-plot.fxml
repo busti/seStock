@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/13.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.unihannover.sestock.PlotController">
+<AnchorPane prefHeight="317.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.unihannover.sestock.PlotController">
    <children>
       <VBox alignment="CENTER" prefHeight="521.0" prefWidth="600.0">
          <children>
@@ -17,6 +17,7 @@
                 <NumberAxis fx:id="y" side="LEFT" />
               </yAxis>
             </LineChart>
+            <Button fx:id="CloseStockChartButton" mnemonicParsing="false" text="Close window" />
          </children>
       </VBox>
    </children>
