@@ -1,11 +1,15 @@
 package de.unihannover.sestock;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +23,9 @@ public class PlotController implements Initializable {
 
     @FXML
     private NumberAxis y;
+
+    @FXML
+    private Button CloseStockChartButton;
 
     public void initialize(URL url, ResourceBundle rb){
         //Open series
@@ -69,6 +76,13 @@ public class PlotController implements Initializable {
 
     }
 
+    Stage plotStage;
+    public void getStage(Stage stage){
+        this.plotStage = stage;
+    }
 
+    public void onCloseButtonClick(ActionEvent event){
+        plotStage.close();
+    }
 
 }
