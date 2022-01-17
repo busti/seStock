@@ -36,5 +36,13 @@ public class MainController {
         stage.setTitle("Dynamic Stock Plot");
         stage.setScene(scene);
         stage.show();
+
+        PlotController plotcontroller = fxmlLoader.getController();
+        plotcontroller.getStage(stage);
+
+    }
+
+    void closeStage(){
+
     }
 }

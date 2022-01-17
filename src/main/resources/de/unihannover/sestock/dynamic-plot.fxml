@@ -17,7 +17,7 @@
                 <NumberAxis fx:id="y" side="LEFT" />
               </yAxis>
             </LineChart>
-            <Button fx:id="CloseStockChartButton" mnemonicParsing="false" text="Close window" />
+            <Button fx:id="CloseStockChartButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close window" />
          </children>
       </VBox>
    </children>
