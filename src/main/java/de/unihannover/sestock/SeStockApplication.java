@@ -16,14 +16,6 @@ public class SeStockApplication extends Application {
         stage.setTitle("SeStock");
         stage.setScene(scene);
         stage.show();
-
-
-        try {
-            AlphavantageApi.TimeSeriesWrapper data = AlphavantageApi.getInstance().time_series_daily("AAPL");
-            System.out.println(data.timeSeries.get("2021-12-31"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {
