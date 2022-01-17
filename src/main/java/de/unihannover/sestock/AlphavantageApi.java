@@ -5,6 +5,10 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +35,7 @@ public class AlphavantageApi {
 
     public List<String> symbol_search(String keyword) throws IOException, InterruptedException {
         var response = makeRequest("&function=SYMBOL_SEARCH&keywords=" + keyword);
-        var data  = gson.fromJson(response, Map.class);
+        var data = gson.fromJson(response, Map.class);
         var symbols = (List<Map<String, String>>) data.get("bestMatches");
         return symbols.stream().map(m -> m.get("1. symbol")).collect(java.util.stream.Collectors.toList());
     }
@@ -81,18 +85,48 @@ public class AlphavantageApi {
         }
     }
 
+    public static class TimeSeriesEntry {
+        public LocalDate date;
+        public TimeSeries timeSeries;
+
+        public TimeSeriesEntry(LocalDate date, TimeSeries timeSeries) {
+            this.date = date;
+            this.timeSeries = timeSeries;
+        }
+
+        @Override
+        public String toString() {
+            return "TimeSeriesEntry{" +
+                    "date=" + date +
+                    ", timeSeries=" + timeSeries +
+                    '}';
+        }
+    }
+
     public static class TimeSeriesWrapper {
         @SerializedName("Meta Data")
         public Metadata metadata;
 
         @SerializedName("Time Series (Daily)")
-        public Map<String, TimeSeries> timeSeries;
+        public Map<String, TimeSeries> timeSeriesMap;
+
+        public List<TimeSeriesEntry> timeSeriesSorted() {
+            return timeSeriesMap
+                    .entrySet()
+                    .stream()
+                    .map(e -> new TimeSeriesEntry(
+                            LocalDate.parse(e.getKey()),
+                            e.getValue()
+                    ))
+                    .sorted(Comparator.comparing(a -> a.date))
+                    .collect(java.util.stream.Collectors.toList());
+        }
 
         @Override
         public String toString() {
             return "TimeSeriesWrapper{" +
                     "metadata=" + metadata +
-                    ", timeSeries=" + timeSeries +
+                    ", timeSeries=" + timeSeriesMap +
                     '}';
         }
     }
