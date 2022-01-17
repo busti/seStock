@@ -30,6 +30,7 @@ public class PlotController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         //Open series
         XYChart.Series open = new XYChart.Series();
+        open.setName("open");
         open.getData().add(new XYChart.Data("2021-08-25", 139.9200));
         open.getData().add(new XYChart.Data("2021-08-26", 139.9700));
         open.getData().add(new XYChart.Data("2021-08-27", 138.7100));
@@ -40,6 +41,7 @@ public class PlotController implements Initializable {
 
         //Close series
         XYChart.Series close = new XYChart.Series();
+        close.setName("close");
         close.getData().add(new XYChart.Data("2021-08-25", 110.9200));
         close.getData().add(new XYChart.Data("2021-08-26", 108.9200));
         close.getData().add(new XYChart.Data("2021-08-27", 107.9200));
@@ -50,6 +52,7 @@ public class PlotController implements Initializable {
 
         //High series
         XYChart.Series high = new XYChart.Series();
+        high.setName("high");
         high.getData().add(new XYChart.Data("2021-08-25", 150.9200));
         high.getData().add(new XYChart.Data("2021-08-26", 155.9200));
         high.getData().add(new XYChart.Data("2021-08-27", 129.9200));
@@ -60,6 +63,7 @@ public class PlotController implements Initializable {
 
         //Close series
         XYChart.Series low = new XYChart.Series();
+        low.setName("low");
         low.getData().add(new XYChart.Data("2021-08-25", 170.9200));
         low.getData().add(new XYChart.Data("2021-08-26", 171.9200));
         low.getData().add(new XYChart.Data("2021-08-27", 175.9200));
@@ -73,6 +77,9 @@ public class PlotController implements Initializable {
         LineChartStock.getData().addAll(close);
         LineChartStock.getData().addAll(high);
         LineChartStock.getData().addAll(low);
+
+        ReadJson rj = new ReadJson();
+        rj.read();
 
     }
 

@@ -13,7 +13,7 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.8.1'
+    junitVersion = '5.8.2'
 }
 
 sourceCompatibility = '11'
@@ -35,8 +35,11 @@ javafx {
 
 dependencies {
 
+    implementation 'org.glassfish:jsonp-jaxrs-1x:1.1.6'
+    implementation 'javax.json.bind:javax.json.bind-api:1.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'javax.json:javax.json-api:1.1.4'
 }
 
 test {
