@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
 
 public class SeStockApplication extends Application {
     @Override
@@ -31,6 +30,11 @@ public class SeStockApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Dies ist ein Drucker :-)");
         Label lb = (Label) scene.lookup("#stock");
+        try{
+            stock = PrintController.getPrintValue(stock);
+        } catch (Exception e){
+            System.out.println("Error.");
+        }
         lb.setText(stock);
         stage.setScene(scene);
         stage.show();

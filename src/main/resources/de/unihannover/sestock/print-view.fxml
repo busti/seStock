@@ -12,8 +12,14 @@
                 <Label fx:id="stock" text="X" BorderPane.alignment="CENTER" />
             </center>
             <bottom>
-                <Button onAction="#onPrintButtonClick" mnemonicParsing="false" text="Start printing" BorderPane.alignment="CENTER" />
+
             </bottom></BorderPane>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#onPDFButtonClick" text="PDF" BorderPane.alignment="BASELINE_LEFT" />
+            <Button mnemonicParsing="false" onAction="#onPrintButtonClick" text="PRINT" BorderPane.alignment="BASELINE_RIGHT" />
+        </buttons>
+      </ButtonBar>
     </children>
 
 </VBox>

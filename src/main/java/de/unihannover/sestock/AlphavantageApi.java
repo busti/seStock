@@ -1,19 +1,17 @@
 package de.unihannover.sestock;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.*;
-import com.google.gson.annotations.SerializedName;
 
 public class AlphavantageApi {
     private static AlphavantageApi instance = new AlphavantageApi();
