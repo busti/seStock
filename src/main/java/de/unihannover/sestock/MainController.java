@@ -1,5 +1,6 @@
 package de.unihannover.sestock;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.fxml.FXMLLoader;
@@ -67,5 +68,12 @@ public class MainController {
         PlotController plotcontroller = fxmlLoader.getController();
         plotcontroller.getStage(stage);
         plotcontroller.updateStockChart(stockName.getEditor().getText());
+    }
+
+    @FXML
+    public void onPrintButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) welcomeText.getScene().getWindow();
+        String stock = stockName.getEditor().getText();
+        SeStockApplication.print(stage, stock);
     }
 }

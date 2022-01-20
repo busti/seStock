@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.unihannover.sestock.PrintController">
+    <padding>
+    </padding>
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <center>
+                <Label fx:id="stock" text="X" BorderPane.alignment="CENTER" />
+            </center>
+            <bottom>
+                <Button onAction="#onPrintButtonClick" mnemonicParsing="false" text="Start printing" BorderPane.alignment="CENTER" />
+            </bottom></BorderPane>
+    </children>
+
+</VBox>
