@@ -2,8 +2,6 @@ package de.unihannover.sestock;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -12,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -35,11 +32,11 @@ public class PlotController {
     private Label stockTitle;
 
     private String stockName;
-
+/*
     public void initialize(URL url, ResourceBundle rb){
 
     }
-
+*/
     public void updateStockChart(String stName){
 
         //Open series
