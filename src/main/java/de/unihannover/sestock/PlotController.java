@@ -32,11 +32,7 @@ public class PlotController {
     private Label stockTitle;
 
     private String stockName;
-/*
-    public void initialize(URL url, ResourceBundle rb){
 
-    }
-*/
     public void updateStockChart(String stName){
 
         //Open series
