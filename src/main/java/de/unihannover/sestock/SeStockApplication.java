@@ -16,6 +16,13 @@ public class SeStockApplication extends Application {
         stage.setTitle("SeStock");
         stage.setScene(scene);
         stage.show();
+
+        try {
+            var data = AlphavantageApi.getInstance().time_series_daily("TSLA");
+            System.out.println(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
