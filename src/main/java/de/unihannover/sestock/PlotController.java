@@ -33,7 +33,7 @@ public class PlotController {
 
     private String stockName;
 
-    public void updateStockChart(String stName){
+    public void updateStockChart(String symbol){
 
         //Open series
         XYChart.Series open = new XYChart.Series();
@@ -51,13 +51,13 @@ public class PlotController {
         XYChart.Series low = new XYChart.Series();
         low.setName("low");
 
-        System.out.print("\nEndlich angekommen " + stName + "\n");
+        System.out.print("\nEndlich angekommen " + symbol + "\n");
 
-        stockTitle.setText("Stock Chart "+stName);
+        stockTitle.setText("Stock Chart " + symbol);
 
         //Filling charts with selected data
         try {
-            var data = AlphavantageApi.getInstance().time_series_daily("IBM");
+            var data = AlphavantageApi.getInstance().time_series_daily("TSLA");
             for (var entry : data.timeSeriesSorted()) {
                 low.getData().add(new XYChart.Data(entry.date.format(DateTimeFormatter.ISO_DATE), entry.timeSeries.low));
                 high.getData().add(new XYChart.Data(entry.date.format(DateTimeFormatter.ISO_DATE), entry.timeSeries.high));

@@ -22,14 +22,27 @@ public class AlphavantageApi {
         return instance;
     }
 
-    private static String API_KEY = "ZD3ECEFKA5VV0RWG";
-    private static String API_URI = "https://www.alphavantage.co/query?apikey=" + API_KEY;
+    private static String API_URI = "https://www.alphavantage.co/query?apikey=";
+
+    public static String generateRandomApiKey() {
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        var random = new java.util.Random();
+        var result = new StringBuilder(16);
+        for (int i = 0; i < 16; i++) {
+            result.append(chars.charAt(random.nextInt(chars.length())));
+        }
+        return result.toString();
+    }
+
+    public static String getApiUri() {
+        return API_URI + "?apikey=" + generateRandomApiKey();
+    }
 
     private HttpClient httpClient = HttpClient.newHttpClient();
     private Gson gson = new Gson();
 
     private String makeRequest(String query) throws IOException, InterruptedException {
-        var request = HttpRequest.newBuilder().uri(URI.create(API_URI + query)).build();
+        var request = HttpRequest.newBuilder().uri(URI.create(getApiUri() + query)).build();
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
@@ -133,6 +146,7 @@ public class AlphavantageApi {
 
     public TimeSeriesWrapper time_series_daily(String symbol) throws IOException, InterruptedException {
         var response = makeRequest("&function=TIME_SERIES_DAILY&symbol=" + symbol);
+        System.out.println(response);
         var data = gson.fromJson(response, TimeSeriesWrapper.class);
         return data;
     }

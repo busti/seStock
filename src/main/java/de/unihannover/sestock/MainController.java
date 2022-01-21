@@ -30,9 +30,11 @@ public class MainController {
     @FXML
     protected void onStockNameChange() throws IOException, InterruptedException {
         var text = stockName.getEditor().getText();
-        List<String> data = AlphavantageApi.getInstance().symbol_search(text);
-        updateComboBoxRecommendations(data);
-        stockName.show();
+        if (text.length() > 3) {
+            List<String> data = AlphavantageApi.getInstance().symbol_search(text);
+            updateComboBoxRecommendations(data);
+            stockName.show();
+        }
     }
 
     private void updateComboBoxRecommendations(List<String> recomendations) {

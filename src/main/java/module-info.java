@@ -3,8 +3,6 @@ module de.unihannover.sestock {
     requires javafx.fxml;
     requires java.net.http;
     requires com.google.gson;
-    requires java.json;
-
 
     opens de.unihannover.sestock to javafx.fxml;
     exports de.unihannover.sestock;
