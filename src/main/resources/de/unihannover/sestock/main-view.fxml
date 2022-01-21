@@ -13,5 +13,11 @@
     <ComboBox fx:id="stockName" onKeyReleased="#onStockNameChange" editable="true" prefWidth="150.0" promptText="Kursnamen..." />
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
+    <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button onAction="#onPrintButtonClick" mnemonicParsing="false" text="Drucken" />
+            <Button mnemonicParsing="false" text="Plotter" />
+            <Button onAction="#onHelloButtonClick" text="Kurs" />
+        </buttons>
+    </ButtonBar>
 </VBox>
